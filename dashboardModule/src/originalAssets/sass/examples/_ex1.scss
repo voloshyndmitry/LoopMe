@@ -1,0 +1,16 @@
+.root{
+  @extend .bg-info;
+  margin: 0 auto;
+  height: 100px;
+  div{
+    float: left;
+    height: 100%;
+    border: 1px solid;
+  }
+  .root_main-container{
+    width: calc(100% - 304px);
+  }
+  .root_banner-container{
+    width: 300px;
+  }
+}
