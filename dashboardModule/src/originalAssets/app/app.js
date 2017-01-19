@@ -2,10 +2,8 @@ import deviceOs from './json/deviceOsVersion.json';
 import gender from './json/gender.json';
 import AbstrctComponent from './abstractModule/abstractModule';
 
-console.log(deviceOs);
-console.log(gender);
-
 class DevaseModule extends AbstrctComponent{};
+class GenderModule extends AbstrctComponent{};
 
 const devaseModule = new DevaseModule(
     {
@@ -15,7 +13,14 @@ const devaseModule = new DevaseModule(
     }
 );
 
-devaseModule.showIn('body');
+devaseModule.showIn('.deviceOs');
 
 
-
+const genderModule = new GenderModule(
+    {
+        title: 'Device Os Version',
+        text: 'Device Os Version',
+        model: gender
+    }
+);
+genderModule.showIn('.gender');

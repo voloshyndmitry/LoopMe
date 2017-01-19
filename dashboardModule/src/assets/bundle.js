@@ -47,15 +47,15 @@ var bundle =
 
 	'use strict';
 
-	var _deviceOsVersion = __webpack_require__(3);
+	var _deviceOsVersion = __webpack_require__(1);
 
 	var _deviceOsVersion2 = _interopRequireDefault(_deviceOsVersion);
 
-	var _gender = __webpack_require__(4);
+	var _gender = __webpack_require__(2);
 
 	var _gender2 = _interopRequireDefault(_gender);
 
-	var _abstractModule = __webpack_require__(5);
+	var _abstractModule = __webpack_require__(3);
 
 	var _abstractModule2 = _interopRequireDefault(_abstractModule);
 
@@ -66,9 +66,6 @@ var bundle =
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	console.log(_deviceOsVersion2.default);
-	console.log(_gender2.default);
 
 	var DevaseModule = function (_AbstrctComponent) {
 	    _inherits(DevaseModule, _AbstrctComponent);
@@ -84,16 +81,208 @@ var bundle =
 
 	;
 
+	var GenderModule = function (_AbstrctComponent2) {
+	    _inherits(GenderModule, _AbstrctComponent2);
+
+	    function GenderModule() {
+	        _classCallCheck(this, GenderModule);
+
+	        return _possibleConstructorReturn(this, (GenderModule.__proto__ || Object.getPrototypeOf(GenderModule)).apply(this, arguments));
+	    }
+
+	    return GenderModule;
+	}(_abstractModule2.default);
+
+	;
+
 	var devaseModule = new DevaseModule({
 	    title: 'Device Os Version',
 	    text: 'Device Os Version',
 	    model: _deviceOsVersion2.default
 	});
 
-		devaseModule.showIn('body');
+	devaseModule.showIn('.deviceOs');
+
+	var genderModule = new GenderModule({
+	    title: 'Device Os Version',
+	    text: 'Device Os Version',
+	    model: _gender2.default
+	});
+		genderModule.showIn('.gender');
 
 /***/ },
 /* 1 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	module.exports = {
+		"chart": [["Android 4.4.2", 23.86], ["Android 5.1.1", 13.85], ["Android 6.0.1", 9.65], ["Android 4.4.4", 8.97], ["Android 4.2.2", 8.73], ["Android 5.0.2", 7.63], ["Android 5.0", 6.41], ["Android 5.1", 4.69], ["Android 5.0.1", 4.08], ["Android 4.3", 2.99]],
+		"distribution": 100
+		};
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	module.exports = {
+		"chart": [["Female", 53.06], ["Male", 46.94]],
+		"distribution": 55.75
+		};
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _highcharts = __webpack_require__(4);
+
+	var _highcharts2 = _interopRequireDefault(_highcharts);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var AbstractComponent = function () {
+	    function AbstractComponent(config) {
+	        _classCallCheck(this, AbstractComponent);
+
+	        config = config || {};
+	        this.title = config.title || 'example Title';
+	        this.text = config.text || 'example text';
+	        this.model = config.model || {};
+	    }
+
+	    _createClass(AbstractComponent, [{
+	        key: 'showIn',
+	        value: function showIn(selector) {
+	            this.container = document.querySelector(selector);
+	            this._checkError();
+	            this._showHighchars();
+	        }
+	    }, {
+	        key: '_checkError',
+	        value: function _checkError() {
+	            var data = this.model;
+
+	            if ((typeof data === 'undefined' ? 'undefined' : _typeof(data)) != 'object' || !!data.join) {
+	                throw new Error('this data is not a object.');
+	            }
+	            if (!data.distribution) {
+	                throw new Error('Data does not include distribution.');
+	            }
+	            if (!data.chart) {
+	                throw new Error('Data does not include chart.');
+	            }
+	            if (!data.chart.join) {
+	                throw new Error('Data.chart is not a array.');
+	            }
+	            if (this._isShown) {
+	                throw new Error('This component is already shown in a region.');
+	            }
+	        }
+	    }, {
+	        key: '_showHighchars',
+	        value: function _showHighchars() {
+	            this._isShow = true;
+	            var _this = this;
+	            this.chart = _highcharts2.default.chart(_this.container, {
+	                chart: {
+	                    plotBackgroundColor: null,
+	                    plotBorderWidth: 0,
+	                    plotShadow: false
+	                },
+	                colors: ['#784ba2', '#845cab', '#926fb4', '#9e81bd', '#ac92c7', '#bba5d0', '#c8b6d9', '#d6c9e3', '#e3dbed', '#f1edf6'],
+
+	                yAxis: {
+	                    min: 0,
+	                    max: null
+	                },
+	                title: {
+	                    text: '<span>' + _this.title + '</span><br><span style="color: grey">' + _this.model.distribution + '% Data Points</span>',
+	                    align: 'center',
+	                    verticalAlign: 'middle'
+	                },
+	                tooltip: {
+	                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	                },
+	                plotOptions: {
+	                    pie: {
+	                        dataLabels: {
+	                            enabled: false,
+	                            distance: -50,
+	                            style: {
+	                                fontWeight: 'bold',
+	                                color: 'white'
+	                            }
+	                        },
+	                        marker: {
+	                            enabled: false
+	                        },
+	                        startAngle: -90,
+	                        endAngle: 90,
+	                        center: ['50%', '50%'],
+	                        showInLegend: true
+
+	                    }
+	                },
+	                legend: {
+	                    y: 230,
+	                    align: 'center',
+	                    verticalAlign: 'center',
+	                    layout: 'vertical',
+	                    symbolRadius: 0,
+	                    labelFormat: '{name} - {y}%',
+	                    padding: 10
+	                },
+
+	                series: [{
+	                    type: 'pie',
+	                    name: _this.text,
+	                    innerSize: '60%',
+	                    data: _this.model.chart,
+	                    marker: {
+	                        enabled: false
+	                    }
+	                }]
+	            });
+	        }
+	    }, {
+	        key: 'update',
+	        value: function update(data) {
+	            var _this = this;
+	            this.chart.update({
+	                series: [{
+	                    type: 'pie',
+	                    name: _this.text,
+	                    innerSize: '60%',
+	                    data: data.chart,
+	                    marker: {
+	                        enabled: false
+	                    }
+	                }]
+	            });
+	        }
+	    }]);
+
+	    return AbstractComponent;
+	}();
+
+		exports.default = AbstractComponent;
+
+/***/ },
+/* 4 */
 /***/ function(module, exports) {
 
 	/*
@@ -483,137 +672,6 @@ var bundle =
 	a)},this)};B.prototype.matchResponsiveRule=function(f,g){var l=this.respRules,q=f.condition,d;d=q.callback||function(){return this.chartWidth<=r(q.maxWidth,Number.MAX_VALUE)&&this.chartHeight<=r(q.maxHeight,Number.MAX_VALUE)&&this.chartWidth>=r(q.minWidth,0)&&this.chartHeight>=r(q.minHeight,0)};void 0===f._id&&(f._id=a.uniqueKey());d=d.call(this);!l[f._id]&&d?f.chartOptions&&(l[f._id]=this.currentOptions(f.chartOptions),this.update(f.chartOptions,g)):l[f._id]&&!d&&(this.update(l[f._id],g),delete l[f._id])};
 	B.prototype.currentOptions=function(a){function f(a,d,b,l){var p,q;for(p in a)if(!l&&-1<H(p,["series","xAxis","yAxis"]))for(a[p]=g(a[p]),b[p]=[],q=0;q<a[p].length;q++)b[p][q]={},f(a[p][q],d[p][q],b[p][q],l+1);else G(a[p])?(b[p]={},f(a[p],d[p]||{},b[p],l+1)):b[p]=d[p]||null}var l={};f(a,this.options,l,0);return l}})(L);return L});
 
-
-/***/ },
-/* 2 */,
-/* 3 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	module.exports = {
-		"chart": [["Android 4.4.2", 23.86], ["Android 5.1.1", 13.85], ["Android 6.0.1", 9.65], ["Android 4.4.4", 8.97], ["Android 4.2.2", 8.73], ["Android 5.0.2", 7.63], ["Android 5.0", 6.41], ["Android 5.1", 4.69], ["Android 5.0.1", 4.08], ["Android 4.3", 2.99]],
-		"distribution": 100
-		};
-
-/***/ },
-/* 4 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	module.exports = {
-		"chart": [["Female", 53.06], ["Male", 46.94]],
-		"distribution": 55.75
-		};
-
-/***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _highcharts = __webpack_require__(1);
-
-	var _highcharts2 = _interopRequireDefault(_highcharts);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var AbstractComponent = function () {
-	    function AbstractComponent(config) {
-	        _classCallCheck(this, AbstractComponent);
-
-	        config = config || {};
-	        this.title = config.title || 'example Title';
-	        this.text = config.text || 'example text';
-	        this.model = config.model;
-	    }
-
-	    _createClass(AbstractComponent, [{
-	        key: 'showIn',
-	        value: function showIn(selector) {
-	            var container = document.querySelector(selector);
-	            this._checkData();
-	            this._showHighchars(container);
-	        }
-	    }, {
-	        key: '_checkData',
-	        value: function _checkData() {}
-	    }, {
-	        key: '_showHighchars',
-	        value: function _showHighchars(container) {
-	            var _this = this;
-	            _highcharts2.default.chart(container, {
-	                chart: {
-	                    plotBackgroundColor: null,
-	                    plotBorderWidth: 0,
-	                    plotShadow: false
-	                },
-	                colors: ['#784ba2', '#845cab', '#926fb4', '#9e81bd', '#ac92c7', '#bba5d0', '#c8b6d9', '#d6c9e3', '#e3dbed', '#f1edf6'],
-
-	                title: {
-	                    text: '<span>' + _this.title + '</span><br><span style="color: grey">' + _this.model.distribution + '% Data Points</span>',
-	                    align: 'center',
-	                    verticalAlign: 'middle'
-	                },
-	                tooltip: {
-	                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-	                },
-	                plotOptions: {
-	                    pie: {
-	                        dataLabels: {
-	                            enabled: false,
-	                            distance: -50,
-	                            style: {
-	                                fontWeight: 'bold',
-	                                color: 'white'
-	                            }
-	                        },
-	                        marker: {
-	                            enabled: false
-	                        },
-	                        startAngle: -90,
-	                        endAngle: 90,
-	                        center: ['50%', '75%'],
-	                        showInLegend: true
-
-	                    }
-	                },
-	                legend: {
-	                    align: 'center',
-	                    layout: 'vertical',
-	                    symbolRadius: 0,
-	                    labelFormat: '{name} - {y}%'
-	                },
-
-	                series: [{
-	                    type: 'pie',
-	                    name: _this.text,
-	                    innerSize: '60%',
-	                    data: _this.model.chart,
-	                    marker: {
-	                        enabled: false
-	                    }
-	                }]
-	            });
-	        }
-	    }, {
-	        key: 'destroy',
-	        value: function destroy() {}
-	    }]);
-
-	    return AbstractComponent;
-	}();
-
-		exports.default = AbstractComponent;
 
 /***/ }
 /******/ ]);
