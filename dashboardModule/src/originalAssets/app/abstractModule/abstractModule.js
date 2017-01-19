@@ -24,14 +24,11 @@ class AbstractComponent {
                 plotBorderWidth: 0,
                 plotShadow: false
             },
-            colorAxis: {
-                colorAxis: {
-                    minColor: '#FFFFFF',
-                    maxColor: Highcharts.getOptions().colors[0]
-                },
-            },
+            colors: ['#784ba2', '#845cab', '#926fb4', '#9e81bd', '#ac92c7',
+                '#bba5d0', '#c8b6d9', '#d6c9e3', '#e3dbed', '#f1edf6'],
+
             title: {
-                text: `<span>${_this.title}</span><br><span>${_this.model.distribution}% Data Points</span>`,
+                text: `<span>${_this.title}</span><br><span style="color: grey">${_this.model.distribution}% Data Points</span>`,
                 align: 'center',
                 verticalAlign: 'middle',
                 // y: 40
@@ -82,54 +79,4 @@ class AbstractComponent {
 
     }
 }
-// Highcharts.chart(document.body, {
-//     chart: {
-//         plotBackgroundColor: null,
-//         plotBorderWidth: 0,
-//         plotShadow: false
-//     },
-//     title: {
-//         text: 'Browser<br>shares<br>2015',
-//         align: 'center',
-//         verticalAlign: 'middle',
-//         y: 40
-//     },
-//     tooltip: {
-//         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-//     },
-//     plotOptions: {
-//         pie: {
-//             dataLabels: {
-//                 enabled: true,
-//                 distance: -50,
-//                 style: {
-//                     fontWeight: 'bold',
-//                     color: 'white'
-//                 }
-//             },
-//             startAngle: -90,
-//             endAngle: 90,
-//             center: ['50%', '75%']
-//         }
-//     },
-//     series: [{
-//         type: 'pie',
-//         name: 'Browser share',
-//         innerSize: '50%',
-//         data: [
-//             ['Firefox', 10.38],
-//             ['IE', 56.33],
-//             ['Chrome', 24.03],
-//             ['Safari', 4.77],
-//             ['Opera', 0.91],
-//             {
-//                 name: 'Proprietary or Undetectable',
-//                 y: 0.2,
-//                 dataLabels: {
-//                     enabled: false
-//                 }
-//             }
-//         ]
-//     }]
-// });
 export default AbstractComponent;
