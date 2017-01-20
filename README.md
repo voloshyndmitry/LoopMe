@@ -6,18 +6,30 @@
 
 ## The second task
 
-### How to install
+``` bash
+$ cd ./dashboardModule
+```
 
-- npm i
+### How to install
+``` bash
+$ npm i
+
+```
 
 ### Dev mode
 
-- npm run watch
+``` bash
+$ npm run watch
+
+```
+
 
 ### Start test (example tests)
+``` bash
+$ npm run tests
+$ npm run test-show-report (for show result in browser)
 
-- npm run tests
-- npm run test-show-report (for show result in browser)
+```
 
 ### How to use
 - ./dashboardModule/src/originalAssets <- **interesting files**
