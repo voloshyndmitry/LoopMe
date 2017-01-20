@@ -1,9 +1,4 @@
 # Test for LoopMe
-
-## The first task
-
-- ./adUnit/index.html <- **open in browser** *:)* 
-
 ## The second task
 
 ``` bash
