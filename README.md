@@ -1,10 +1,10 @@
-# Test for LoopMe
+# LoopMe
 
-## The first task
+## The first
 
 - ./adUnit/index.html <- **open in browser** *:)* 
 
-## The second task
+## The second
 
 ``` bash
 $ cd ./dashboardModule
@@ -33,6 +33,7 @@ $ npm run test-show-report (for show result in browser)
 
 ### How to use
 - ./dashboardModule/src/originalAssets <- **interesting files**
+
 #### interface module
 ``` html
 class ClassComponent extends AbstractModule{};
